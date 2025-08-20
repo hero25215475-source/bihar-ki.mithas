@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bihar Ki Mithash</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff8f0;
+      text-align: center;
+    }
+    header {
+      background: #ff6600;
+      color: white;
+      padding: 20px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .products {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      margin: 15px;
+      padding: 15px;
+      width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .card h3 {
+      margin: 10px 0;
+    }
+    .card button {
+      background: #ff6600;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .card button:hover {
+      background: #e65c00;
+    }
+    footer {
+      background: #222;
+      color: white;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    /* Order Form */
+    .order-form {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .order-form h2 {
+      margin-bottom: 15px;
+      color: #ff6600;
+    }
+    .order-form input, .order-form select, .order-form button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    .order-form button {
+      background: #ff6600;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .order-form button:hover {
+      background: #e65c00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    बिहार की मिठास 🍬
+  </header>
+
+  <!-- Products Section -->
+  <div class="products">
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Litti_Chokha.jpg" alt="लिट्टी चोखा">
+      <h3>लिट्टी चोखा</h3>
+      <p>प्राइस: ₹120</p>
+      <button onclick="document.getElementById('product').value='लिट्टी चोखा'">Order Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Khaja_sweet.jpg" alt="खाजा">
+      <h3>खाजा</h3>
+      <p>प्राइस: ₹150</p>
+      <button onclick="document.getElementById('product').value='खाजा'">Order Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Thekua.jpg" alt="ठेकुआ">
+      <h3>ठेकुआ</h3>
+      <p>प्राइस: ₹100</p>
+      <button onclick="document.getElementById('product').value='ठेकुआ'">Order Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Motichoor_Laddu.jpg" alt="मोटिचूर लड्डू">
+      <h3>मोटिचूर लड्डू</h3>
+      <p>प्राइस: ₹180</p>
+      <button onclick="document.getElementById('product').value='मोटिचूर लड्डू'">Order Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Balushahi_sweet.jpg" alt="बालूशाही">
+      <h3>बालूशाही</h3>
+      <p>प्राइस: ₹160</p>
+      <button onclick="document.getElementById('product').value='बालूशाही'">Order Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Rasgulla_Sweet.jpg" alt="रसगुल्ला">
+      <h3>रसगुल्ला</h3>
+      <p>प्राइस: ₹140</p>
+      <button onclick="document.getElementById('product').value='रसगुल्ला'">Order Now</button>
+    </div>
+  </div>
+
+  <!-- Order Form -->
+  <div class="order-form">
+    <h2>ऑर्डर फॉर्म</h2>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="text" name="name" placeholder="आपका नाम" required>
+      <input type="text" name="phone" placeholder="मोबाइल नंबर" required>
+      <select name="product" id="product" required>
+        <option value="">प्रोडक्ट चुनें</option>
+        <option value="लिट्टी चोखा">लिट्टी चोखा</option>
+        <option value="खाजा">खाजा</option>
+        <option value="ठेकुआ">ठेकुआ</option>
+        <option value="मोटिचूर लड्डू">मोटिचूर लड्डू</option>
+        <option value="बालूशाही">बालूशाही</option>
+        <option value="रसगुल्ला">रसगुल्ला</option>
+      </select>
+      <input type="number" name="quantity" placeholder="कितना ऑर्डर करना है?" required>
+      <button type="submit">Order Submit करें</button>
+    </form>
+  </div>
+
+  <footer>
+    © 2025 Bihar Ki Mithash | सभी अधिकार सुरक्षित
+  </footer>
+</body>
+</html>
