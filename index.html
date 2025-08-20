@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>बिहार की मिठास</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<body class="bg-gradient-to-br from-orange-50 to-orange-100 text-gray-900">
+<body class="bg-gradient-to-br from-yellow-50 to-orange-100 text-gray-900">
 
   <!-- Navbar -->
   <header class="bg-orange-500 text-white shadow-lg">
@@ -64,7 +63,11 @@
   <!-- JS -->
   <script>
     let cart = [];
-    let loggedInUser = localStorage.getItem("user");
+    let loggedInUser = JSON.parse(localStorage.getItem("user"));
+
+    if(loggedInUser){
+      document.getElementById("loginBtn").innerText = loggedInUser.name;
+    }
 
     function addToCart(name, price){
       cart.push({name, price});
@@ -104,26 +107,15 @@
         return;
       }
 
-      // Razorpay Payment
-      var options = {
-        "key": "rzp_test_yourKeyHere",  // 👉 यहाँ Razorpay API Key डालना होगा
-        "amount": total * 100,
-        "currency": "INR",
-        "name": "Bihar Ki Mithash",
-        "description": "Order Payment",
-        "handler": function (response){
-          alert("✅ Payment Successful!\nPayment ID: " + response.razorpay_payment_id);
-          cart = [];
-          document.getElementById("cartCount").innerText = 0;
-          updateCartBox();
-        },
-        "prefill": {
-          "name": loggedInUser.name,
-          "contact": loggedInUser.phone
-        }
-      };
-      var rzp1 = new Razorpay(options);
-      rzp1.open();
+      // Save order to localStorage
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.push({user: loggedInUser, cart, total, date: new Date().toLocaleString()});
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      alert("✅ Order Successful! हमारी टीम जल्द ही आपसे संपर्क करेगी।");
+      cart = [];
+      document.getElementById("cartCount").innerText = 0;
+      updateCartBox();
     }
   </script>
 </body>
