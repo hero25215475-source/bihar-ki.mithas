@@ -5,39 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>बिहार की मिठास</title>
   <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #ffecd2, #fcb69f);
-      color: #333;
+      margin: 0;
     }
 
     header {
       background: linear-gradient(135deg, #ff5e00, #ff9a44);
       color: white;
       text-align: center;
-      padding: 30px 20px;
+      padding: 25px;
       font-size: 32px;
       font-weight: bold;
       box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
     }
 
-    header p {
-      font-size: 18px;
-      margin-top: 8px;
-      font-weight: normal;
-    }
-
     .container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      gap: 25px;
       padding: 40px;
       max-width: 1200px;
       margin: auto;
@@ -87,15 +74,53 @@
     .btn {
       background: linear-gradient(135deg, #ff5e00, #ff9a44);
       color: white;
-      padding: 12px 20px;
+      padding: 10px 16px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
-      transition: 0.3s;
     }
 
     .btn:hover {
+      background: linear-gradient(135deg, #e24e00, #ff7a1a);
+    }
+
+    /* Order Form */
+    .order-section {
+      background: white;
+      padding: 30px;
+      margin: 40px auto;
+      border-radius: 15px;
+      max-width: 600px;
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .order-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff5e00;
+    }
+
+    .order-section input, .order-section select, .order-section textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .order-section button {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      background: linear-gradient(135deg, #ff5e00, #ff9a44);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .order-section button:hover {
       background: linear-gradient(135deg, #e24e00, #ff7a1a);
     }
 
@@ -118,36 +143,51 @@
   <div class="container">
     <!-- लिट्टी चोखा -->
     <div class="card">
-      <img src="A_digital_photograph_showcases_three_traditional_B.png" alt="लिट्टी चोखा">
+      <img src="https://images.unsplash.com/photo-1601050694287-f2e4d5d8b2fb?w=600" alt="लिट्टी चोखा">
       <div class="card-content">
         <h3>लिट्टी चोखा</h3>
-        <p>बिहार का असली स्वाद आपके लिए।</p>
+        <p>बिहार का असली स्वाद।</p>
         <p class="price">₹120</p>
-        <button class="btn">Order Now</button>
       </div>
     </div>
 
     <!-- खाजा -->
     <div class="card">
-      <img src="A_digital_photograph_showcases_three_traditional_B.png" alt="खाजा">
+      <img src="https://images.unsplash.com/photo-1589308078055-3b7d5a36b8e2?w=600" alt="खाजा">
       <div class="card-content">
         <h3>खाजा</h3>
-        <p>मीठा और कुरकुरा बिहार की पहचान।</p>
+        <p>मीठा और कुरकुरा।</p>
         <p class="price">₹150</p>
-        <button class="btn">Order Now</button>
       </div>
     </div>
 
     <!-- ठेकुआ -->
     <div class="card">
-      <img src="A_digital_photograph_showcases_three_traditional_B.png" alt="ठेकुआ">
+      <img src="https://images.unsplash.com/photo-1617196038435-d63a2b8e2c64?w=600" alt="ठेकुआ">
       <div class="card-content">
         <h3>ठेकुआ</h3>
-        <p>पारंपरिक मिठास हर मौके के लिए।</p>
+        <p>त्योहारों की पहचान।</p>
         <p class="price">₹100</p>
-        <button class="btn">Order Now</button>
       </div>
     </div>
+  </div>
+
+  <!-- Order Form -->
+  <div class="order-section">
+    <h2>ऑर्डर करें</h2>
+    <form action="https://formspree.io/f/yourFormID" method="POST">
+      <input type="text" name="name" placeholder="आपका नाम" required>
+      <input type="email" name="email" placeholder="आपका ईमेल" required>
+      <input type="text" name="phone" placeholder="मोबाइल नंबर" required>
+      <select name="product" required>
+        <option value="">प्रोडक्ट चुनें</option>
+        <option value="litti">लिट्टी चोखा</option>
+        <option value="khaja">खाजा</option>
+        <option value="thekua">ठेकुआ</option>
+      </select>
+      <textarea name="address" rows="4" placeholder="डिलीवरी का पता" required></textarea>
+      <button type="submit">Order Place करें</button>
+    </form>
   </div>
 
   <footer>
