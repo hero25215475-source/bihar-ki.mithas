@@ -1,297 +1,300 @@
-import React, { useState } from "react";
-
-// BiharBazaar - Single-file React component (Tailwind CSS assumed)
-// Features: Hero, product grid with photos, prices, add-to-cart, cart sidebar, product modal
-// All visible text is in Hindi. Replace image URLs or wire a real backend as needed.
-
-export default function BiharBazaar() {
-  const sampleProducts = [
-    {
-      id: 1,
-      name: "Thekua (ठेकुआ)",
-      desc: "मक्खनदार और गरमा गरम पारंपरिक बिस्कुट — घर जैसा स्वाद.",
-      price: 150,
-      unit: "250g",
-      img: "https://source.unsplash.com/800x600/?thekua,biscuit",
-    },
-    {
-      id: 2,
-      name: "Khasta (खस्ता)",
-      desc: "क्रिस्पी और मसालेदार — त्योहारों की शान.",
-      price: 120,
-      unit: "200g",
-      img: "https://source.unsplash.com/800x600/?khasta,snack",
-    },
-    {
-      id: 3,
-      name: "Litti Chokha Pack",
-      desc: "घरेलू तरीके से बनी स्वादिष्ट लिट्टी-चोखा (frozen/ready-to-eat).",
-      price: 320,
-      unit: "4 पीस",
-      img: "https://source.unsplash.com/800x600/?litti,chokha,food",
-    },
-    {
-      id: 4,
-      name: "Laung-Lata (लौंग-लता) मिष्ठान",
-      desc: "मिठास भरा पारंपरिक पटना स्टाइल मिष्ठान.",
-      price: 220,
-      unit: "300g",
-      img: "https://source.unsplash.com/800x600/?indian-sweets",
-    },
-  ];
-
-  const [products] = useState(sampleProducts);
-  const [cart, setCart] = useState([]);
-  const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState(null);
-  const [showCart, setShowCart] = useState(false);
-
-  function addToCart(product) {
-    setCart((prev) => {
-      const found = prev.find((p) => p.id === product.id);
-      if (found) {
-        return prev.map((p) => (p.id === product.id ? { ...p, qty: p.qty + 1 } : p));
-      }
-      return [...prev, { ...product, qty: 1 }];
-    });
-  }
-
-  function removeFromCart(id) {
-    setCart((prev) => prev.filter((p) => p.id !== id));
-  }
-
-  function changeQty(id, qty) {
-    if (qty <= 0) return removeFromCart(id);
-    setCart((prev) => prev.map((p) => (p.id === id ? { ...p, qty } : p)));
-  }
-
-  const subtotal = cart.reduce((s, p) => s + p.price * p.qty, 0);
-
-  const filtered = products.filter(
-    (p) =>
-      p.name.toLowerCase().includes(query.toLowerCase()) ||
-      p.desc.toLowerCase().includes(query.toLowerCase())
-  );
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="text-2xl font-bold text-rose-600">BiharBazaar</div>
-            <div className="text-sm text-gray-600">Bihar ke mashhoor swad — seedha apke ghar</div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <input
-              className="px-3 py-2 border rounded-md w-64"
-              placeholder="Search: thekua, khasta, litti..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-
-            <button
-              className="px-4 py-2 bg-rose-500 text-white rounded-md shadow hover:bg-rose-600"
-              onClick={() => setShowCart(true)}
-            >
-              Cart ({cart.reduce((s, p) => s + p.qty, 0)})
-            </button>
-          </div>
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bihar Ki Mithash – बिहार की मिठास | Famous Bihar Foods Online</title>
+    <meta name="description" content="लिट्टी-चोखा, थेकुआ, खाजा, अनरसा, सत्तू, घुघनी—बिहार के असली स्वाद अब ऑनलाइन। 'Bihar Ki Mithash' पर आर्डर करें।" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23f59e0b'/%3E%3Ctext x='32' y='38' font-size='28' text-anchor='middle' fill='white'%3EB%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .shadow-smooth { box-shadow: 0 10px 25px rgba(0,0,0,.07); }
+      .card { border-radius: 1rem; border: 1px solid #f5d08a; background: #fff; }
+      .img { width: 100%; height: 190px; object-fit: cover; border-radius: 0.75rem; }
+      .btn { background:#b45309; color:#fff; padding:.5rem .9rem; border-radius:.6rem; font-weight:700; }
+      .btn:hover { background:#92400e; }
+    </style>
+  </head>
+  <body class="bg-amber-50 text-gray-900">
+    <!-- Header -->
+    <header class="sticky top-0 z-30 bg-amber-50/90 backdrop-blur border-b border-amber-200">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-amber-500 grid place-items-center text-white font-extrabold">B</div>
+        <div class="font-extrabold text-lg">Bihar Ki Mithash</div>
+        <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-amber-600 text-white">Desi Taste</span>
+        <div class="ml-auto flex items-center gap-2">
+          <input id="search" placeholder="खोजें: लिट्टी, खाजा..." class="w-56 md:w-80 bg-white border rounded-md px-3 py-2" />
+          <button id="cartBtn" class="btn flex items-center gap-2"><span>🛒</span><span id="cartCount">0</span></button>
         </div>
-      </header>
+      </div>
+    </header>
 
-      {/* Hero */}
-      <section className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        <div className="md:col-span-2">
-          <h1 className="text-4xl font-extrabold">मजेदार बिहार — घर बैठे मंगाइए</h1>
-          <p className="mt-3 text-gray-700">ठेठ देसी स्वाद — Thekua, Khasta, Litti-Chokha और और भी बहुत कुछ। ताज़ा, भरोसेमंद और तेज़ डिलीवरी (region specific).</p>
-
-          <div className="mt-6 flex gap-3">
-            <button
-              onClick={() => window.scrollTo({ top: 1000, behavior: "smooth" })}
-              className="px-4 py-2 bg-rose-500 text-white rounded-md"
-            >
-              शॉप शुरू करें
-            </button>
-
-            <button
-              onClick={() => alert('हम जल्दी ही विक्रेता पंजीकरण और पेमेंट गेटवे जोड़ेंगे (demo).')}
-              className="px-4 py-2 border rounded-md"
-            >
-              विक्रेता बनें
-            </button>
-          </div>
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+          बिहार का असली स्वाद, <span class="text-amber-700">आपके घर तक।</span>
+        </h1>
+        <p class="mt-4 text-gray-700">ताज़ा, हाइजीनिक और प्यार से बना – लिट्टी-चोखा, थेकुआ, खाजा और बहुत कुछ।</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#menu" class="btn">मेन्यू देखें</a>
+          <a href="#contact" class="px-4 py-2 rounded-lg border font-semibold">संपर्क करें</a>
         </div>
-
-        <div className="hidden md:block">
-          <img
-            src="https://source.unsplash.com/600x600/?bihar,food,indian"
-            alt="Bihar special"
-            className="rounded-2xl shadow-lg w-full object-cover h-64"
-          />
+        <div class="mt-6 flex items-center gap-6 text-sm text-gray-600">
+          <span>⚡ तेज़ डिलीवरी</span>
+          <span>⭐ 4.9/5 रेटिंग</span>
         </div>
-      </section>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <img class="img" src="https://source.unsplash.com/800x600/?litti,chokha" alt="लिट्टी-चोखा" />
+        <img class="img" src="https://source.unsplash.com/800x600/?thekua,bihar,sweet" alt="थेकुआ" />
+        <img class="img col-span-2" style="height:220px" src="https://source.unsplash.com/1200x600/?khaja,indian,sweet" alt="खाजा" />
+      </div>
+    </section>
 
-      {/* Products */}
-      <main className="max-w-6xl mx-auto px-4 pb-20">
-        <h2 className="text-2xl font-semibold mb-4">लोकप्रिय वस्तुएँ</h2>
+    <div class="max-w-6xl mx-auto"><hr class="border-amber-200"/></div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((p) => (
-            <div key={p.id} className="bg-white rounded-2xl shadow p-4 flex flex-col">
-              <div className="relative">
-                <img
-                  src={p.img}
-                  alt={p.name}
-                  className="rounded-lg h-44 w-full object-cover"
-                />
-                <div className="absolute right-3 top-3 bg-white/80 px-2 py-1 rounded-full text-sm">{p.unit}</div>
-              </div>
-
-              <div className="mt-3 flex-1">
-                <h3 className="text-lg font-semibold">{p.name}</h3>
-                <p className="text-sm text-gray-600 mt-2">{p.desc}</p>
-              </div>
-
-              <div className="mt-4 flex items-center justify-between">
-                <div>
-                  <div className="text-sm text-gray-500">Price</div>
-                  <div className="text-xl font-bold">₹{p.price}</div>
-                </div>
-
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => { setSelected(p); }}
-                    className="px-3 py-2 border rounded-md text-sm"
-                  >
-                    देखें
-                  </button>
-
-                  <button
-                    onClick={() => addToCart(p)}
-                    className="px-3 py-2 bg-rose-500 text-white rounded-md text-sm"
-                  >
-                    Add
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+    <!-- Products -->
+    <section id="menu" class="max-w-6xl mx-auto px-4 py-10">
+      <div class="flex items-end justify-between mb-6">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-extrabold">फेमस व्यंजन</h2>
+          <p class="text-sm text-gray-600">ताज़गी और गुणवत्ता की गारंटी।</p>
         </div>
+        <div class="text-sm text-gray-600">कुल आइटम: <span id="count">0</span></div>
+      </div>
+      <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
 
-        {filtered.length === 0 && (
-          <div className="mt-8 text-center text-gray-600">कोई आइटम नहीं मिला — खोज बदलकर देखें।</div>
-        )}
-      </main>
-
-      {/* Cart Sidebar */}
-      {showCart && (
-        <div className="fixed inset-0 z-50 flex">
-          <div className="flex-1 bg-black/40" onClick={() => setShowCart(false)} />
-
-          <div className="w-96 bg-white shadow-xl p-6 overflow-y-auto">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold">आपकी टोकरी</h3>
-              <button className="text-gray-500" onClick={() => setShowCart(false)}>बंद</button>
-            </div>
-
-            <div className="mt-4">
-              {cart.length === 0 ? (
-                <div className="text-gray-600">टोकरी खाली है।</div>
-              ) : (
-                <div className="flex flex-col gap-3">
-                  {cart.map((c) => (
-                    <div key={c.id} className="flex items-center gap-3 border-b pb-3">
-                      <img src={c.img} alt={c.name} className="w-16 h-16 object-cover rounded" />
-                      <div className="flex-1">
-                        <div className="font-semibold">{c.name}</div>
-                        <div className="text-sm text-gray-500">₹{c.price} x {c.qty}</div>
-                      </div>
-
-                      <div className="flex flex-col items-end gap-2">
-                        <div className="flex items-center gap-1">
-                          <button
-                            onClick={() => changeQty(c.id, c.qty - 1)}
-                            className="px-2 py-1 border rounded"
-                          >-</button>
-                          <div className="px-2">{c.qty}</div>
-                          <button
-                            onClick={() => changeQty(c.id, c.qty + 1)}
-                            className="px-2 py-1 border rounded"
-                          >+</button>
-                        </div>
-
-                        <button onClick={() => removeFromCart(c.id)} className="text-sm text-red-500">हटाएँ</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="mt-6 border-t pt-4">
-                <div className="flex items-center justify-between">
-                  <div className="text-gray-600">Subtotal</div>
-                  <div className="font-bold">₹{subtotal}</div>
-                </div>
-
-                <button
-                  disabled={cart.length === 0}
-                  onClick={() => alert('Checkout demo — पेमेंट गेटवे जोड़ने के लिए कहें')}
-                  className="mt-4 w-full px-4 py-2 bg-rose-500 text-white rounded disabled:opacity-60"
-                >
-                  Checkout
-                </button>
-              </div>
-            </div>
-          </div>
+    <!-- Cart Drawer -->
+    <div id="drawer" class="fixed inset-0 hidden">
+      <div class="absolute inset-0 bg-black/40" onclick="toggleCart(false)"></div>
+      <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white p-4 shadow-smooth">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xl font-extrabold">आपका कार्ट</h3>
+          <button onclick="toggleCart(false)" class="px-3 py-1 rounded-md border">✖</button>
         </div>
-      )}
-
-      {/* Product Modal */}
-      {selected && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setSelected(null)}></div>
-          <div className="bg-white rounded-2xl shadow-xl max-w-3xl w-full z-50 overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="p-4">
-                <img src={selected.img} alt={selected.name} className="w-full h-80 object-cover rounded-lg" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold">{selected.name}</h3>
-                <p className="mt-2 text-gray-700">{selected.desc}</p>
-                <div className="mt-4">
-                  <div className="text-sm text-gray-500">मात्रा</div>
-                  <div className="text-xl font-semibold">₹{selected.price} / {selected.unit}</div>
-                </div>
-
-                <div className="mt-6 flex gap-3">
-                  <button
-                    onClick={() => { addToCart(selected); setSelected(null); }}
-                    className="px-4 py-2 bg-rose-500 text-white rounded-md"
-                  >
-                   _CART में जोड़ें
-                  </button>
-
-                  <button onClick={() => setSelected(null)} className="px-4 py-2 border rounded-md">बंद करें</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div id="cartItems" class="space-y-3 max-h-[60vh] overflow-auto"></div>
+        <div class="border-t pt-3 mt-3 flex items-center justify-between">
+          <div class="text-lg font-bold">कुल</div>
+          <div id="cartTotal" class="text-lg font-extrabold">₹0</div>
         </div>
-      )}
-
-      {/* Footer */}
-      <footer className="mt-12 bg-white border-t">
-        <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between">
-          <div className="text-sm text-gray-600">© {new Date().getFullYear()} BiharBazaar — Made with ❤️ in Bihar</div>
-          <div className="flex gap-4 mt-3 md:mt-0 text-sm">
-            <a className="hover:underline">Contact</a>
-            <a className="hover:underline">Vendors</a>
-            <a className="hover:underline">Privacy</a>
-          </div>
+        <div class="mt-3 flex gap-2">
+          <button onclick="clearCart()" class="px-3 py-2 rounded-md border font-semibold">कार्ट साफ करें</button>
+          <button onclick="openCheckout()" class="btn w-full">चेकआउट</button>
         </div>
-      </footer>
+        <p class="text-xs text-gray-500 mt-2">डेमो मोड: ऑर्डर ईमेल ड्राफ्ट में खुलेगा।</p>
+      </div>
     </div>
-  );
-}
+
+    <!-- Checkout Modal -->
+    <div id="checkout" class="fixed inset-0 hidden">
+      <div class="absolute inset-0 bg-black/40" onclick="toggleCheckout(false)"></div>
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-lg bg-white p-5 rounded-2xl shadow-smooth">
+        <h3 class="text-xl font-extrabold mb-3">डिलीवरी विवरण</h3>
+        <form id="orderForm" class="space-y-3">
+          <input name="name" required placeholder="पूरा नाम" class="w-full border rounded-md px-3 py-2" />
+          <input name="phone" required placeholder="मोबाइल नंबर" class="w-full border rounded-md px-3 py-2" />
+          <input name="email" placeholder="ईमेल (वैकल्पिक)" class="w-full border rounded-md px-3 py-2" />
+          <input name="address" required placeholder="पता" class="w-full border rounded-md px-3 py-2" />
+          <div class="flex items-center gap-3">
+            <label class="text-sm">पेमेंट:</label>
+            <select name="payment" class="border rounded-md px-3 py-2 w-full">
+              <option value="COD">कैश ऑन डिलीवरी (COD)</option>
+              <option value="UPI">UPI</option>
+              <option value="Card">कार्ड</option>
+            </select>
+          </div>
+          <div class="flex gap-2 justify-end">
+            <button type="button" onclick="toggleCheckout(false)" class="px-3 py-2 rounded-md border font-semibold">रद्द</button>
+            <button class="btn" type="submit">ऑर्डर कंफर्म करें</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <section id="contact" class="max-w-6xl mx-auto px-4 py-10">
+      <h3 class="text-xl md:text-2xl font-extrabold mb-4">संपर्क करें</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <div class="font-medium">कस्टमर केयर</div>
+          <p class="text-sm text-gray-600">+91 90000 00000</p>
+        </div>
+        <div class="card p-6">
+          <div class="font-medium">किचन/पिकअप</div>
+          <p class="text-sm text-gray-600">पटना, बिहार</p>
+        </div>
+        <div class="card p-6">
+          <div class="font-medium">ईमेल</div>
+          <p class="text-sm text-gray-600">orders@biharkimithash.in</p>
+        </div>
+      </div>
+      <p class="mt-6 text-xs text-gray-500">© <span id="year"></span> Bihar Ki Mithash. सर्वाधिकार सुरक्षित।</p>
+    </section>
+
+    <script>
+      const PRODUCTS = [
+        { id: "litti", name: "लिट्टी-चोखा", price: 149, tag: "Best Seller", desc: "घी से सनी लिट्टी, मसालेदार चोखा के साथ।", img: "https://source.unsplash.com/800x600/?litti,chokha" },
+        { id: "thekua", name: "थेकुआ (मीठा)", price: 199, tag: "Traditional", desc: "त्यौहारों की शान, कुरकुरा और सुगंधित।", img: "https://source.unsplash.com/800x600/?thekua,bihar,sweet" },
+        { id: "khaja", name: "खाजा", price: 179, tag: "Crispy", desc: "परतदार मिठाई जो मुंह में घुल जाए।", img: "https://source.unsplash.com/800x600/?khaja,indian,sweet" },
+        { id: "anarsa", name: "अनरसा", price: 159, tag: "Festive", desc: "चावल-गुड़ से बनी खास मिठास।", img: "https://source.unsplash.com/800x600/?anarsa,indian,sweet" },
+        { id: "sattu", name: "सत्तू ड्रिंक (पाउडर)", price: 129, tag: "Summer", desc: "ठंडक व पोषण, घर पर तुरंत बनाएं।", img: "https://source.unsplash.com/800x600/?sattu,drink" },
+        { id: "ghugni", name: "चना घुघनी", price: 139, tag: "Spicy", desc: "देसी मसालों के साथ झटपट नाश्ता।", img: "https://source.unsplash.com/800x600/?ghugni,indian,food" }
+      ];
+
+      const formatINR = n => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n);
+
+      const state = {
+        query: "",
+        cart: JSON.parse(localStorage.getItem("cart") || "{}")
+      };
+
+      const el = sel => document.querySelector(sel);
+
+      function saveCart(){
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+        renderCart();
+      }
+
+      function addToCart(id){
+        state.cart[id] = (state.cart[id] || 0) + 1;
+        saveCart();
+        toggleCart(true);
+      }
+      function decFromCart(id){
+        if(!state.cart[id]) return;
+        state.cart[id] -= 1;
+        if(state.cart[id] <= 0) delete state.cart[id];
+        saveCart();
+      }
+      function removeFromCart(id){
+        delete state.cart[id];
+        saveCart();
+      }
+      function clearCart(){
+        state.cart = {};
+        saveCart();
+      }
+
+      function toggleCart(show){
+        el("#drawer").classList.toggle("hidden", !show);
+      }
+      function openCheckout(){
+        toggleCheckout(true);
+      }
+      function toggleCheckout(show){
+        el("#checkout").classList.toggle("hidden", !show);
+      }
+
+      function renderProducts(){
+        const grid = el("#grid");
+        grid.innerHTML = "";
+        const q = state.query.trim().toLowerCase();
+        const list = q ? PRODUCTS.filter(p => (p.name + " " + p.desc).toLowerCase().includes(q)) : PRODUCTS;
+        el("#count").textContent = list.length;
+        list.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "card p-4";
+          card.innerHTML = `
+            <img class="img" src="${p.img}" alt="${p.name}"/>
+            <div class="mt-3 flex items-center justify-between">
+              <div class="font-semibold">${p.name}</div>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-amber-600 text-white">${p.tag}</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">${p.desc}</p>
+            <div class="mt-3 flex items-center justify-between">
+              <div class="font-extrabold">₹${p.price}</div>
+              <button class="btn" data-id="${p.id}">जोड़ें</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+        // bind add buttons
+        grid.querySelectorAll("button[data-id]").forEach(b => {
+          b.addEventListener("click", () => addToCart(b.getAttribute("data-id")));
+        });
+        el("#cartCount").textContent = Object.values(state.cart).reduce((a,b)=>a+b,0);
+      }
+
+      function renderCart(){
+        const list = Object.entries(state.cart).map(([id, qty]) => {
+          const p = PRODUCTS.find(x => x.id === id);
+          return { ...p, qty, line: p.price * qty };
+        });
+        const box = el("#cartItems");
+        box.innerHTML = "";
+        if(list.length === 0){
+          box.innerHTML = '<p class="text-sm text-gray-500">कार्ट खाली है। स्वादिष्ट चीज़ें जोड़ें!</p>';
+        } else {
+          list.forEach(it => {
+            const row = document.createElement("div");
+            row.className = "flex items-center gap-3";
+            row.innerHTML = `
+              <img src="${it.img}" alt="${it.name}" class="w-16 h-16 object-cover rounded-md"/>
+              <div class="flex-1">
+                <div class="font-medium">${it.name}</div>
+                <div class="text-sm text-gray-500">₹${it.price} × ${it.qty} = <span class="font-semibold text-gray-800">${formatINR(it.line)}</span></div>
+                <div class="mt-2 flex items-center gap-2">
+                  <button class="px-2 py-1 rounded-md border" data-dec="${it.id}">-</button>
+                  <span class="text-sm">${it.qty}</span>
+                  <button class="px-2 py-1 rounded-md border" data-inc="${it.id}">+</button>
+                  <button class="px-2 py-1 rounded-md border" data-del="${it.id}">हटाएँ</button>
+                </div>
+              </div>
+            `;
+            box.appendChild(row);
+          });
+        }
+        const total = list.reduce((s, it) => s + it.line, 0);
+        el("#cartTotal").textContent = formatINR(total);
+        el("#cartCount").textContent = Object.values(state.cart).reduce((a,b)=>a+b,0);
+        // Bind qty buttons
+        box.querySelectorAll("[data-inc]").forEach(b => b.addEventListener("click", () => { addToCart(b.getAttribute("data-inc")); renderCart(); }));
+        box.querySelectorAll("[data-dec]").forEach(b => b.addEventListener("click", () => { decFromCart(b.getAttribute("data-dec")); renderCart(); }));
+        box.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", () => { removeFromCart(b.getAttribute("data-del")); renderCart(); }));
+      }
+
+      // Search
+      el("#search").addEventListener("input", (e) => { state.query = e.target.value; renderProducts(); });
+
+      // Cart open
+      el("#cartBtn").addEventListener("click", () => toggleCart(true));
+
+      // Checkout form
+      el("#orderForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        const name = data.get("name");
+        const phone = data.get("phone");
+        const email = data.get("email") || "orders@biharkimithash.in";
+        const address = data.get("address");
+        const payment = data.get("payment");
+        const items = Object.entries(state.cart).map(([id, qty]) => {
+          const p = PRODUCTS.find(x => x.id === id);
+          return `- ${p.name} x ${qty} = ₹${p.price * qty}`;
+        }).join("\n");
+        const total = Object.entries(state.cart).reduce((s,[id,qty]) => {
+          const p = PRODUCTS.find(x => x.id === id); return s + p.price * qty;
+        }, 0);
+        const subject = encodeURIComponent("New Order – Bihar Ki Mithash");
+        const body = encodeURIComponent(
+`Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Payment: ${payment}
+Items:
+${items}
+Total: ₹${total}`
+        );
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+      });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Initial render
+      renderProducts();
+      renderCart();
+    </script>
+  </body>
+</html>
