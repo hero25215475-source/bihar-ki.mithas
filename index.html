@@ -5,111 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>बिहार की मिठास</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background: linear-gradient(to bottom, #fff7e6, #ffe6cc);
-      font-family: 'Segoe UI', sans-serif;
-    }
-  </style>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<body class="text-gray-800">
+<body class="bg-gradient-to-br from-orange-50 to-orange-100 text-gray-900">
 
   <!-- Navbar -->
-  <header class="bg-orange-500 text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+  <header class="bg-orange-500 text-white shadow-lg">
+    <div class="container mx-auto flex justify-between items-center p-4">
       <h1 class="text-2xl font-bold">🍬 Bihar Ki Mithash</h1>
       <div class="flex items-center gap-4">
-        <button onclick="loginUser()" id="loginBtn" class="bg-white text-orange-500 px-3 py-1 rounded-lg">Login</button>
-        <div class="relative">
-          <button onclick="toggleCart()" class="bg-white text-orange-500 px-3 py-1 rounded-lg">Cart 🛒 <span id="cartCount">0</span></button>
-          <div id="cartBox" class="hidden absolute right-0 mt-2 bg-white text-black p-4 rounded shadow-lg w-60"></div>
-        </div>
+        <button onclick="login()" class="bg-white text-orange-600 px-3 py-1 rounded font-bold" id="loginBtn">Login</button>
+        <button onclick="toggleCart()" class="bg-white text-orange-600 px-3 py-1 rounded font-bold">
+          Cart 🛒 <span id="cartCount">0</span>
+        </button>
       </div>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="text-center py-10 bg-gradient-to-r from-orange-200 to-orange-100">
+  <section class="text-center py-10">
     <h2 class="text-3xl font-bold text-orange-700">बिहार का असली स्वाद</h2>
-    <p class="text-lg text-gray-700 mt-2">ताज़ा, स्वादिष्ट और देसी मिठाई – अब आपके घर तक</p>
+    <p class="text-lg">ताज़ा, स्वादिष्ट और देसी मिठाई – अब आपके घर तक</p>
   </section>
 
   <!-- Products -->
-  <section id="products" class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-  </section>
+  <main class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+    <div class="bg-white p-4 rounded-lg shadow">
+      <img src="https://source.unsplash.com/200x150/?sweets" alt="तीसरी पेड़ा" class="rounded w-full h-40 object-cover">
+      <h3 class="mt-2 font-bold">तीसरी पेड़ा</h3>
+      <p class="text-red-600 font-semibold">₹200</p>
+      <button onclick="addToCart('तीसरी पेड़ा',200)" class="bg-orange-500 text-white px-3 py-1 rounded mt-2">Add to Cart</button>
+    </div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white text-center py-4 mt-6">
-    © Bihar Ki Mithash • Patna • 📞 87575-93271
-  </footer>
+    <div class="bg-white p-4 rounded-lg shadow">
+      <img src="https://source.unsplash.com/200x150/?khaja,sweets" alt="खाजा" class="rounded w-full h-40 object-cover">
+      <h3 class="mt-2 font-bold">खाजा</h3>
+      <p class="text-red-600 font-semibold">₹150</p>
+      <button onclick="addToCart('खाजा',150)" class="bg-orange-500 text-white px-3 py-1 rounded mt-2">Add to Cart</button>
+    </div>
 
-<script>
-  // Product Data
-  const products = [
-    {name: "तीसरी पेड़ा", price: 200, img: "https://cdn.pixabay.com/photo/2017/01/06/19/15/indian-sweets-1956531_1280.jpg"},
-    {name: "खाजा", price: 150, img: "https://cdn.pixabay.com/photo/2020/07/26/06/47/indian-food-5438748_1280.jpg"},
-    {name: "लड्डू", price: 100, img: "https://cdn.pixabay.com/photo/2016/09/02/23/10/indian-sweets-1649896_1280.jpg"},
-    {name: "रसगुल्ला", price: 180, img: "https://cdn.pixabay.com/photo/2020/05/01/06/44/rasgulla-5114975_1280.jpg"},
-    {name: "जलेबी", price: 120, img: "https://cdn.pixabay.com/photo/2021/01/19/07/58/jalebi-5929447_1280.jpg"},
-    {name: "गुलाब जामुन", price: 220, img: "https://cdn.pixabay.com/photo/2019/09/25/09/30/gulab-jamun-4504225_1280.jpg"},
-  ];
+    <div class="bg-white p-4 rounded-lg shadow">
+      <img src="https://source.unsplash.com/200x150/?laddu" alt="लड्डू" class="rounded w-full h-40 object-cover">
+      <h3 class="mt-2 font-bold">लड्डू</h3>
+      <p class="text-red-600 font-semibold">₹100</p>
+      <button onclick="addToCart('लड्डू',100)" class="bg-orange-500 text-white px-3 py-1 rounded mt-2">Add to Cart</button>
+    </div>
+  </main>
 
-  const container = document.getElementById('products');
-  products.forEach(p=>{
-    container.innerHTML += `
-      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 transition transform">
-        <img src="${p.img}" class="w-full h-48 object-cover"/>
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">${p.name}</h3>
-          <p class="text-orange-600 font-bold">₹${p.price}</p>
-          <button onclick="addToCart('${p.name}', ${p.price})" class="mt-2 bg-orange-500 text-white px-3 py-1 rounded">Add to Cart</button>
-        </div>
-      </div>
-    `;
-  });
+  <!-- Cart -->
+  <div id="cartBox" class="hidden fixed right-4 top-20 bg-white text-black p-4 rounded shadow-lg w-80">
+    <h3 class="font-bold text-lg">🛒 Your Cart</h3>
+    <div id="cartItems" class="mt-2"></div>
+    <hr class="my-2"/>
+    <p class="font-bold">Total: ₹<span id="totalPrice">0</span></p>
+    <button onclick="placeOrder()" class="mt-2 w-full bg-green-600 text-white px-3 py-2 rounded">Place Order</button>
+  </div>
 
-  // Cart System
-  let cart = [];
-  function addToCart(name, price){
-    cart.push({name, price});
-    document.getElementById("cartCount").innerText = cart.length;
-    updateCartBox();
-  }
+  <!-- JS -->
+  <script>
+    let cart = [];
+    let loggedInUser = localStorage.getItem("user");
 
-  function toggleCart(){
-    document.getElementById("cartBox").classList.toggle("hidden");
-  }
+    function addToCart(name, price){
+      cart.push({name, price});
+      document.getElementById("cartCount").innerText = cart.length;
+      updateCartBox();
+    }
 
-  function updateCartBox(){
-    let cartBox = document.getElementById("cartBox");
-    cartBox.innerHTML = cart.map(c=>`<p>${c.name} - ₹${c.price}</p>`).join("");
-    cartBox.innerHTML += `<hr/><p class="font-bold">Total: ₹${cart.reduce((a,c)=>a+c.price,0)}</p>`;
-  }
+    function updateCartBox(){
+      let cartItems = document.getElementById("cartItems");
+      let total = cart.reduce((a,c)=>a+c.price,0);
+      cartItems.innerHTML = cart.map(c=>`<p>${c.name} - ₹${c.price}</p>`).join("");
+      document.getElementById("totalPrice").innerText = total;
+    }
 
-  // Login/Profile System
-  function loginUser(){
-    let user = localStorage.getItem("user");
-    if(user){
-      alert("आप पहले से login हैं: " + user);
-    } else {
-      let name = prompt("अपना नाम डालें:");
-      let phone = prompt("मोबाइल नंबर डालें:");
+    function toggleCart(){
+      document.getElementById("cartBox").classList.toggle("hidden");
+    }
+
+    function login(){
+      let name = prompt("अपना नाम दर्ज करें:");
+      let phone = prompt("मोबाइल नंबर दर्ज करें:");
       if(name && phone){
-        localStorage.setItem("user", name + " (" + phone + ")");
-        document.getElementById("loginBtn").innerText = "👤 " + name;
-        alert("Welcome " + name + "!");
+        loggedInUser = {name, phone};
+        localStorage.setItem("user", JSON.stringify(loggedInUser));
+        document.getElementById("loginBtn").innerText = name;
       }
     }
-  }
 
-  // Show user if logged in
-  window.onload = ()=>{
-    let user = localStorage.getItem("user");
-    if(user){
-      document.getElementById("loginBtn").innerText = "👤 " + user.split(" ")[0];
+    function placeOrder(){
+      if(!loggedInUser){
+        alert("कृपया पहले Login करें!");
+        return;
+      }
+      let total = cart.reduce((a,c)=>a+c.price,0);
+      if(total <= 0){
+        alert("Cart खाली है!");
+        return;
+      }
+
+      // Razorpay Payment
+      var options = {
+        "key": "rzp_test_yourKeyHere",  // 👉 यहाँ Razorpay API Key डालना होगा
+        "amount": total * 100,
+        "currency": "INR",
+        "name": "Bihar Ki Mithash",
+        "description": "Order Payment",
+        "handler": function (response){
+          alert("✅ Payment Successful!\nPayment ID: " + response.razorpay_payment_id);
+          cart = [];
+          document.getElementById("cartCount").innerText = 0;
+          updateCartBox();
+        },
+        "prefill": {
+          "name": loggedInUser.name,
+          "contact": loggedInUser.phone
+        }
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
     }
-  }
-</script>
-
+  </script>
 </body>
 </html>
