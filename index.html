@@ -1,197 +1,332 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>बिहार की मिठास</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>बिहार की मिठास | Bihar Ki Mithash</title>
+  <meta name="description" content="Bihar Ki Mithash – Litti Chokha, Thekua, Khaja and more. Add to cart, login, and order online." />
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #ffecd2, #fcb69f);
-      margin: 0;
+    :root{
+      --brand:#ff6a00;--brand2:#ff944d;--bg1:#fff1e6;--ink:#222;--muted:#666
     }
-
-    header {
-      background: linear-gradient(135deg, #ff5e00, #ff9a44);
-      color: white;
-      text-align: center;
-      padding: 25px;
-      font-size: 32px;
-      font-weight: bold;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      padding: 40px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
-      transition: transform 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card-content {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .card-content h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      color: #ff5e00;
-    }
-
-    .card-content p {
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    .price {
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-      margin: 10px 0;
-    }
-
-    .btn {
-      background: linear-gradient(135deg, #ff5e00, #ff9a44);
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .btn:hover {
-      background: linear-gradient(135deg, #e24e00, #ff7a1a);
-    }
-
-    /* Order Form */
-    .order-section {
-      background: white;
-      padding: 30px;
-      margin: 40px auto;
-      border-radius: 15px;
-      max-width: 600px;
-      box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
-    }
-
-    .order-section h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #ff5e00;
-    }
-
-    .order-section input, .order-section select, .order-section textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    .order-section button {
-      width: 100%;
-      padding: 14px;
-      font-size: 18px;
-      background: linear-gradient(135deg, #ff5e00, #ff9a44);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .order-section button:hover {
-      background: linear-gradient(135deg, #e24e00, #ff7a1a);
-    }
-
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      font-size: 14px;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(135deg,#ffe8d6,#ffd6ba);color:var(--ink)}
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .nav{max-width:1100px;margin:auto;padding:14px 16px;display:flex;gap:12px;align-items:center}
+    .logo{font-weight:800;font-size:20px;letter-spacing:.4px}
+    .grow{flex:1}
+    .chip{background:rgba(255,255,255,.2);padding:6px 10px;border-radius:999px;font-size:12px}
+    .btn{background:var(--brand);border:0;color:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;box-shadow:0 6px 14px rgba(255,106,0,.25);font-weight:600}
+    .btn.secondary{background:#fff;color:var(--brand)}
+    .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+    .grid{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.08);transition:transform .25s}
+    .card:hover{transform:translateY(-6px)}
+    .card img{width:100%;height:190px;object-fit:cover}
+    .card .p{padding:14px}
+    .price{font-weight:800}
+    .muted{color:var(--muted);font-size:14px}
+    .bar{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .topbar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center}
+    .search{flex:1}
+    .search input{width:100%;padding:10px 12px;border:1px solid #e9e1da;border-radius:12px;background:#fff}
+    .avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.8)}
+    .pill{padding:6px 10px;border-radius:999px;background:#fff;color:var(--brand);font-weight:700;border:1px dashed var(--brand)}
+    /* Drawer/Modal */
+    dialog{border:0;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);max-width:480px;width:92%}
+    dialog::backdrop{background:rgba(0,0,0,.45)}
+    .row{display:flex;align-items:center;gap:10px}
+    .cart-line{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #eee}
+    .qtybtn{border:1px solid #ddd;background:#fafafa;border-radius:8px;padding:4px 10px;cursor:pointer}
+    .total{display:flex;justify-content:space-between;padding-top:10px;font-weight:800}
+    footer{margin-top:36px;background:#222;color:#fff;text-align:center;padding:18px}
+    small.note{display:block;color:#888;margin-top:6px}
+    .tabs{display:flex;gap:6px;margin:10px 0}
+    .tabbtn{flex:1;border:1px solid #eee;background:#f8f8f8;border-radius:10px;padding:8px;cursor:pointer}
+    .tabbtn.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .field{display:block;margin:8px 0}
+    .field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #e2e2e2;border-radius:10px}
+    .center{text-align:center}
   </style>
 </head>
 <body>
   <header>
-    बिहार की मिठास 🍬
-    <p>बिहार के पारंपरिक स्वाद अब ऑनलाइन!</p>
+    <div class="nav">
+      <div class="logo">🍬 Bihar Ki Mithash</div>
+      <span class="chip">Desi Taste • Patna</span>
+      <div class="grow"></div>
+      <button class="btn ghost" id="btnLogin">Login</button>
+      <button class="btn" id="btnCart">Cart <span id="cartCount" class="pill" style="margin-left:8px">0</span></button>
+    </div>
+    <div class="topbar">
+      <div class="search"><input id="search" placeholder="खोजें: लिट्टी, खाजा, ठेकुआ…"/></div>
+      <div class="row" id="profileRow" style="display:none">
+        <img id="avatar" class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200" alt="avatar"/>
+        <div>
+          <div id="profName" style="font-weight:700"></div>
+          <div id="profPhone" class="muted" style="font-size:12px"></div>
+        </div>
+        <button class="btn secondary" id="btnLogout">Logout</button>
+      </div>
+    </div>
   </header>
 
-  <div class="container">
-    <!-- लिट्टी चोखा -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1601050694287-f2e4d5d8b2fb?w=600" alt="लिट्टी चोखा">
-      <div class="card-content">
-        <h3>लिट्टी चोखा</h3>
-        <p>बिहार का असली स्वाद।</p>
-        <p class="price">₹120</p>
-      </div>
-    </div>
+  <!-- Products -->
+  <section class="grid" id="grid"></section>
 
-    <!-- खाजा -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1589308078055-3b7d5a36b8e2?w=600" alt="खाजा">
-      <div class="card-content">
-        <h3>खाजा</h3>
-        <p>मीठा और कुरकुरा।</p>
-        <p class="price">₹150</p>
+  <!-- Cart Drawer (dialog) -->
+  <dialog id="cartDlg">
+    <form method="dialog">
+      <h3>आपका Cart</h3>
+      <div id="cartLines" style="margin-top:10px"></div>
+      <div class="total"><span>कुल</span><span id="cartTotal">₹0</span></div>
+      <div style="margin-top:10px" class="row">
+        <button class="btn secondary" value="cancel">Close</button>
+        <button class="btn" id="btnCheckout" value="confirm">Checkout</button>
       </div>
-    </div>
-
-    <!-- ठेकुआ -->
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1617196038435-d63a2b8e2c64?w=600" alt="ठेकुआ">
-      <div class="card-content">
-        <h3>ठेकुआ</h3>
-        <p>त्योहारों की पहचान।</p>
-        <p class="price">₹100</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Order Form -->
-  <div class="order-section">
-    <h2>ऑर्डर करें</h2>
-    <form action="https://formspree.io/f/yourFormID" method="POST">
-      <input type="text" name="name" placeholder="आपका नाम" required>
-      <input type="email" name="email" placeholder="आपका ईमेल" required>
-      <input type="text" name="phone" placeholder="मोबाइल नंबर" required>
-      <select name="product" required>
-        <option value="">प्रोडक्ट चुनें</option>
-        <option value="litti">लिट्टी चोखा</option>
-        <option value="khaja">खाजा</option>
-        <option value="thekua">ठेकुआ</option>
-      </select>
-      <textarea name="address" rows="4" placeholder="डिलीवरी का पता" required></textarea>
-      <button type="submit">Order Place करें</button>
     </form>
-  </div>
+  </dialog>
+
+  <!-- Auth / Profile dialog -->
+  <dialog id="authDlg">
+    <h3 class="center">Login / Signup</h3>
+    <div class="tabs">
+      <button class="tabbtn active" data-tab="google">Google</button>
+      <button class="tabbtn" data-tab="email">Email</button>
+      <button class="tabbtn" data-tab="phone">Phone OTP</button>
+    </div>
+
+    <div id="tab-google">
+      <div class="center">
+        <button class="btn" id="btnGoogle">Login with Google</button>
+      </div>
+    </div>
+
+    <div id="tab-email" style="display:none">
+      <label class="field">Email <input id="eml" type="email" placeholder="you@example.com"></label>
+      <label class="field">Password <input id="pwd" type="password" placeholder="••••••••"></label>
+      <div class="row">
+        <button class="btn secondary" id="btnSignup" type="button">Sign up</button>
+        <button class="btn" id="btnSignin" type="button">Sign in</button>
+      </div>
+    </div>
+
+    <div id="tab-phone" style="display:none">
+      <label class="field">Mobile <input id="ph" type="tel" placeholder="+91xxxxxxxxxx"></label>
+      <div id="recaptcha-container"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn" id="btnSendOTP" type="button">Send OTP</button>
+      </div>
+      <label class="field">OTP <input id="otp" placeholder="6-digit code"></label>
+      <button class="btn" id="btnVerifyOTP" type="button">Verify & Login</button>
+      <small class="note">Phone login के लिए Firebase में Phone auth और इस domain को Allow करना ज़रूरी है।</small>
+    </div>
+  </dialog>
+
+  <!-- Checkout dialog (collect address + phone) -->
+  <dialog id="checkoutDlg">
+    <h3>डिलीवरी विवरण</h3>
+    <label class="field">पूरा नाम <input id="coName" placeholder="नाम"></label>
+    <label class="field">मोबाइल नंबर <input id="coPhone" placeholder="10-digit"></label>
+    <label class="field">पता <textarea id="coAddr" rows="3" placeholder="पूरा पता"></textarea></label>
+    <div class="row">
+      <button class="btn secondary" id="coClose">Cancel</button>
+      <button class="btn" id="coPlace">Place Order</button>
+    </div>
+    <small class="note">Demo: ऑर्डर summary ईमेल ड्राफ्ट/WhatsApp link में खुलेगा।</small>
+  </dialog>
 
   <footer>
-    © 2025 Bihar Ki Mithash | सभी अधिकार सुरक्षित
+    © <span id="yr"></span> Bihar Ki Mithash • Patna • 87575-93271
   </footer>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    // ===== PRODUCTS (Unsplash images so photos always load) =====
+    const PRODUCTS=[
+      {id:'litti',name:'लिट्टी-चोखा',price:120,desc:'बिहार का असली स्वाद।',img:'https://images.unsplash.com/photo-1601050694287-f2e4d5d8b2fb?w=900&q=80&auto=format&fit=crop'},
+      {id:'khaja',name:'खाजा',price:150,desc:'मीठा और कुरकुरा।',img:'https://images.unsplash.com/photo-1589308078055-3b7d5a36b8e2?w=900&q=80&auto=format&fit=crop'},
+      {id:'thekua',name:'ठेकुआ',price:100,desc:'त्योहारों की पहचान।',img:'https://images.unsplash.com/photo-1617196038435-d63a2b8e2c64?w=900&q=80&auto=format&fit=crop'},
+      {id:'peda',name:'पेडा',price:140,desc:'दूध की मिठास।',img:'https://images.unsplash.com/photo-1606313564200-e75d5e30476e?w=900&q=80&auto=format&fit=crop'},
+      {id:'laddu',name:'मोटिचूर लड्डू',price:180,desc:'हर खुशी के लिए।',img:'https://images.unsplash.com/photo-1590502593741-bf6d99e2e97a?w=900&q=80&auto=format&fit=crop'},
+      {id:'rasgulla',name:'रसगुल्ला',price:140,desc:'सॉफ्ट और रसदार।',img:'https://images.unsplash.com/photo-1625944529622-dc0a73e7ac24?w=900&q=80&auto=format&fit=crop'}
+    ];
+    const ₹=n=>`₹${n}`;
+    const state={cart:{}, user:null};
+
+    // ===== Render products =====
+    const grid=document.getElementById('grid');
+    const search=document.getElementById('search');
+    function renderProducts(){
+      const q=(search.value||'').toLowerCase();
+      grid.innerHTML='';
+      PRODUCTS.filter(p=> (p.name+p.desc).toLowerCase().includes(q)).forEach(p=>{
+        const el=document.createElement('div'); el.className='card';
+        el.innerHTML=`
+          <img src="${p.img}" alt="${p.name}"/>
+          <div class="p">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+              <div>
+                <div style="font-weight:800">${p.name}</div>
+                <div class="muted">${p.desc}</div>
+              </div>
+              <div class="price">${₹(p.price)}</div>
+            </div>
+            <div class="bar">
+              <button class="btn" data-add="${p.id}">Add to Cart</button>
+              <button class="btn secondary" onclick="navigator.share?navigator.share({title:'Bihar Ki Mithash',text:'${p.name}',url:location.href}):alert('Link copied');">Share</button>
+            </div>
+          </div>`;
+        grid.appendChild(el);
+      });
+    }
+    search.addEventListener('input',renderProducts);
+
+    // ===== Cart =====
+    const cartDlg=document.getElementById('cartDlg');
+    const cartLines=document.getElementById('cartLines');
+    const cartTotal=document.getElementById('cartTotal');
+    const cartCount=document.getElementById('cartCount');
+
+    function saveCart(){localStorage.setItem('bkCart',JSON.stringify(state.cart))}
+    function loadCart(){try{state.cart=JSON.parse(localStorage.getItem('bkCart')||'{}')}catch{state.cart={}}}
+    function add(id){state.cart[id]=(state.cart[id]||0)+1;saveCart();syncCartUI()}
+    function dec(id){state.cart[id]=(state.cart[id]||0)-1; if(state.cart[id]<=0) delete state.cart[id]; saveCart(); syncCartUI()}
+    function remove(id){delete state.cart[id]; saveCart(); syncCartUI()}
+    function syncCartUI(){
+      const entries=Object.entries(state.cart);
+      cartCount.textContent=entries.reduce((s,[_id,q])=>s+q,0);
+      cartLines.innerHTML='';
+      let total=0;
+      entries.forEach(([id,qty])=>{
+        const p=PRODUCTS.find(x=>x.id===id); const line=p.price*qty; total+=line;
+        const row=document.createElement('div'); row.className='cart-line';
+        row.innerHTML=`<div class="row"><img src="${p.img}" style="width:56px;height:44px;object-fit:cover;border-radius:8px"><div><div style='font-weight:700'>${p.name}</div><div class='muted'>${₹(p.price)} × ${qty}</div></div></div>
+          <div class='row'>
+            <button class='qtybtn' data-dec='${p.id}'>−</button>
+            <span>${qty}</span>
+            <button class='qtybtn' data-add='${p.id}'>+</button>
+            <button class='qtybtn' data-rm='${p.id}'>✕</button>
+          </div>`;
+        cartLines.appendChild(row);
+      });
+      cartTotal.textContent=₹(total);
+    }
+
+    document.body.addEventListener('click',e=>{
+      const addBtn=e.target.closest('[data-add]');
+      const decBtn=e.target.closest('[data-dec]');
+      const rmBtn=e.target.closest('[data-rm]');
+      if(addBtn){add(addBtn.getAttribute('data-add'))}
+      if(decBtn){dec(decBtn.getAttribute('data-dec'))}
+      if(rmBtn){remove(rmBtn.getAttribute('data-rm'))}
+    });
+
+    // Buttons
+    document.getElementById('btnCart').onclick=()=>cartDlg.showModal();
+    cartDlg.addEventListener('close',()=>syncCartUI());
+
+    // ===== Checkout =====
+    const checkoutDlg=document.getElementById('checkoutDlg');
+    document.getElementById('btnCheckout').onclick=(ev)=>{ev.preventDefault();checkoutDlg.showModal();}
+    document.getElementById('coClose').onclick=()=>checkoutDlg.close();
+    document.getElementById('coPlace').onclick=()=>{
+      const name=document.getElementById('coName').value.trim();
+      const phone=document.getElementById('coPhone').value.trim();
+      const addr=document.getElementById('coAddr').value.trim();
+      const lines=Object.entries(state.cart).map(([id,qty])=>{const p=PRODUCTS.find(x=>x.id===id);return `- ${p.name} × ${qty} = ${₹(p.price*qty)}`});
+      const total=[...Object.entries(state.cart)].reduce((s,[id,q])=>s+PRODUCTS.find(x=>x.id===id).price*q,0);
+      const body=encodeURIComponent(`Order from Bihar Ki Mithash\nName: ${name}\nPhone: ${phone}\nAddress: ${addr}\n\nItems:\n${lines.join('\n')}\nTotal: ${₹(total)}`);
+      location.href=`mailto:orders@your-domain.in?subject=${encodeURIComponent('New Order – Bihar Ki Mithash')}&body=${body}`;
+      checkoutDlg.close();
+    }
+
+    // ===== Auth (Firebase) =====
+    const authDlg=document.getElementById('authDlg');
+    const btnLogin=document.getElementById('btnLogin');
+    const btnLogout=document.getElementById('btnLogout');
+    const profileRow=document.getElementById('profileRow');
+    const profName=document.getElementById('profName');
+    const profPhone=document.getElementById('profPhone');
+    const avatar=document.getElementById('avatar');
+
+    // Tab logic
+    const tabs=document.querySelectorAll('.tabbtn');
+    tabs.forEach(b=>b.onclick=()=>{
+      tabs.forEach(x=>x.classList.remove('active')); b.classList.add('active');
+      document.getElementById('tab-google').style.display=(b.dataset.tab==='google')?'block':'none';
+      document.getElementById('tab-email').style.display=(b.dataset.tab==='email')?'block':'none';
+      document.getElementById('tab-phone').style.display=(b.dataset.tab==='phone')?'block':'none';
+    });
+
+    btnLogin.onclick=()=>authDlg.showModal();
+
+    // Firebase SDK load
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+    import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, RecaptchaVerifier, signInWithPhoneNumber } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+
+    // TODO: Replace with your Firebase config (from console.firebase.google.com)
+    const firebaseConfig={
+      apiKey:"REPLACE_ME",
+      authDomain:"REPLACE_ME.firebaseapp.com",
+      projectId:"REPLACE_ME",
+      appId:"REPLACE_ME"
+    };
+    const app=initializeApp(firebaseConfig);
+    const auth=getAuth(app);
+
+    // Google login
+    document.getElementById('btnGoogle').onclick=async()=>{
+      try{await signInWithPopup(auth,new GoogleAuthProvider());authDlg.close()}catch(err){alert(err.message)}
+    }
+    // Email auth
+    document.getElementById('btnSignup').onclick=async()=>{
+      try{await createUserWithEmailAndPassword(auth,document.getElementById('eml').value,document.getElementById('pwd').value);authDlg.close()}catch(err){alert(err.message)}
+    }
+    document.getElementById('btnSignin').onclick=async()=>{
+      try{await signInWithEmailAndPassword(auth,document.getElementById('eml').value,document.getElementById('pwd').value);authDlg.close()}catch(err){alert(err.message)}
+    }
+
+    // Phone OTP
+    let confirmation;
+    function setupRecaptcha(){
+      try{
+        if(!window.recaptchaVerifier){
+          window.recaptchaVerifier=new RecaptchaVerifier(auth,'recaptcha-container',{size:'invisible'});
+        }
+      }catch(e){console.warn('reCAPTCHA setup issue',e)}
+    }
+    document.getElementById('btnSendOTP').onclick=async()=>{
+      setupRecaptcha();
+      const phone=document.getElementById('ph').value.trim();
+      try{confirmation=await signInWithPhoneNumber(auth,phone,window.recaptchaVerifier); alert('OTP भेज दिया गया है');}
+      catch(err){alert(err.message)}
+    }
+    document.getElementById('btnVerifyOTP').onclick=async()=>{
+      const code=document.getElementById('otp').value.trim();
+      try{await confirmation.confirm(code); authDlg.close()}catch(err){alert(err.message)}
+    }
+
+    onAuthStateChanged(auth,(u)=>{
+      state.user=u||null;
+      if(u){
+        profileRow.style.display='flex';
+        btnLogin.style.display='none';
+        profName.textContent=u.displayName||u.email||'User';
+        profPhone.textContent=u.phoneNumber||'';
+        avatar.src=u.photoURL||'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200';
+      }else{
+        profileRow.style.display='none';
+        btnLogin.style.display='inline-block';
+      }
+    });
+    btnLogout.onclick=()=>signOut(auth);
+
+    // Init
+    document.getElementById('yr').textContent=new Date().getFullYear();
+    loadCart();
+    renderProducts();
+    syncCartUI();
+  </script>
 </body>
 </html>
