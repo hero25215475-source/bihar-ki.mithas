@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Orders</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Navbar -->
+  <header class="bg-blue-600 text-white p-4">
+    <h1 class="text-xl font-bold">📋 Admin Panel - Orders</h1>
+  </header>
+
+  <!-- Orders List -->
+  <main class="container mx-auto mt-6 p-4 bg-white shadow-lg rounded">
+    <h2 class="text-lg font-bold mb-4">सभी Orders</h2>
+    <div id="ordersList" class="space-y-4"></div>
+  </main>
+
+  <script>
+    function loadOrders(){
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      let ordersList = document.getElementById("ordersList");
+
+      if(orders.length === 0){
+        ordersList.innerHTML = "<p class='text-red-600'>कोई Order अभी तक नहीं आया।</p>";
+        return;
+      }
+
+      ordersList.innerHTML = orders.map((o,i)=>`
+        <div class="border p-3 rounded shadow">
+          <h3 class="font-bold text-blue-600">Order #${i+1}</h3>
+          <p>👤 <b>${o.user.name}</b> (📞 ${o.user.phone})</p>
+          <p>🕒 ${o.date}</p>
+          <div class="mt-2">
+            ${o.cart.map(c=>`<p>- ${c.name} (₹${c.price})</p>`).join("")}
+          </div>
+          <p class="font-bold mt-2">Total: ₹${o.total}</p>
+        </div>
+      `).join("");
+    }
+
+    loadOrders();
+  </script>
+</body>
+</html>
