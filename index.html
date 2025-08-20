@@ -5,97 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>बिहार की मिठास</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff7f0;
+    /* Reset */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      color: #333;
+    }
+
     header {
-      background-color: #ff5e00;
+      background: linear-gradient(135deg, #ff5e00, #ff9a44);
       color: white;
-      padding: 15px;
       text-align: center;
-      font-size: 28px;
+      padding: 30px 20px;
+      font-size: 32px;
       font-weight: bold;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
     }
+
+    header p {
+      font-size: 18px;
+      margin-top: 8px;
+      font-weight: normal;
+    }
+
     .container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
       padding: 40px;
-      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
     }
+
     .card {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-      width: 250px;
-      text-align: center;
-      padding: 20px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
     }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
     .card img {
       width: 100%;
-      border-radius: 12px;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
     }
-    .card h3 {
-      margin: 15px 0 10px;
+
+    .card-content {
+      padding: 20px;
+      text-align: center;
     }
+
+    .card-content h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #ff5e00;
+    }
+
+    .card-content p {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
     .price {
       font-size: 18px;
       font-weight: bold;
       color: #333;
+      margin: 10px 0;
     }
+
     .btn {
-      background: #ff5e00;
+      background: linear-gradient(135deg, #ff5e00, #ff9a44);
       color: white;
-      padding: 10px 15px;
+      padding: 12px 20px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 10px;
       font-size: 16px;
+      transition: 0.3s;
     }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #e24e00, #ff7a1a);
+    }
+
     footer {
       background: #222;
       color: white;
       text-align: center;
-      padding: 10px;
-      margin-top: 30px;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <header>बिहार की मिठास 🍬</header>
+  <header>
+    बिहार की मिठास 🍬
+    <p>बिहार के पारंपरिक स्वाद अब ऑनलाइन!</p>
+  </header>
 
   <div class="container">
     <!-- लिट्टी चोखा -->
     <div class="card">
       <img src="A_digital_photograph_showcases_three_traditional_B.png" alt="लिट्टी चोखा">
-      <h3>लिट्टी चोखा</h3>
-      <p class="price">₹120</p>
-      <button class="btn">Order Now</button>
+      <div class="card-content">
+        <h3>लिट्टी चोखा</h3>
+        <p>बिहार का असली स्वाद आपके लिए।</p>
+        <p class="price">₹120</p>
+        <button class="btn">Order Now</button>
+      </div>
     </div>
 
     <!-- खाजा -->
     <div class="card">
       <img src="A_digital_photograph_showcases_three_traditional_B.png" alt="खाजा">
-      <h3>खाजा</h3>
-      <p class="price">₹150</p>
-      <button class="btn">Order Now</button>
+      <div class="card-content">
+        <h3>खाजा</h3>
+        <p>मीठा और कुरकुरा बिहार की पहचान।</p>
+        <p class="price">₹150</p>
+        <button class="btn">Order Now</button>
+      </div>
     </div>
 
     <!-- ठेकुआ -->
     <div class="card">
       <img src="A_digital_photograph_showcases_three_traditional_B.png" alt="ठेकुआ">
-      <h3>ठेकुआ</h3>
-      <p class="price">₹100</p>
-      <button class="btn">Order Now</button>
+      <div class="card-content">
+        <h3>ठेकुआ</h3>
+        <p>पारंपरिक मिठास हर मौके के लिए।</p>
+        <p class="price">₹100</p>
+        <button class="btn">Order Now</button>
+      </div>
     </div>
   </div>
 
-  <footer>© 2025 Bihar Ki Mithash | सभी अधिकार सुरक्षित</footer>
+  <footer>
+    © 2025 Bihar Ki Mithash | सभी अधिकार सुरक्षित
+  </footer>
 </body>
 </html>
